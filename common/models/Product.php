@@ -47,6 +47,7 @@ class Product extends \yii\db\ActiveRecord
             'title' => Yii::t('app', 'Title'),
             'price' => Yii::t('app', 'Price'),
             'types' => Yii::t('app', 'Type'),
+            'images' => Yii::t('app', 'Images'),
             'availability' => Yii::t('app', 'Availability'),
         ];
     }
@@ -82,6 +83,6 @@ class Product extends \yii\db\ActiveRecord
 
     public function fields()
     {
-        return ['id', 'title', 'price', 'availability', 'types', 'images'];
+        return ['id', 'title', 'price', 'types', 'images', 'availability'];
     }
 }
