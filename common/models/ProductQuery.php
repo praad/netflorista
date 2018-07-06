@@ -5,7 +5,7 @@ namespace common\models;
 /**
  * This is the ActiveQuery class for [[Product]].
  *
- * @see Products
+ * @see Product
  */
 class ProductQuery extends \yii\db\ActiveQuery
 {

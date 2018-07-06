@@ -11,8 +11,8 @@ use Yii;
  * @property string         $title
  * @property string         $price
  * @property int            $availability
- * @property ProductImage[] $productsImages
- * @property ProductType[]  $productsTypes
+ * @property ProductImage[] $productsImage
+ * @property ProductType[]  $productsType
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -46,6 +46,7 @@ class Product extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'title' => Yii::t('app', 'Title'),
             'price' => Yii::t('app', 'Price'),
+            'types' => Yii::t('app', 'Type'),
             'availability' => Yii::t('app', 'Availability'),
         ];
     }
@@ -53,17 +54,20 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProductImage()
+    public function getImages()
     {
-        return $this->hasMany(ProductImage::className(), ['product_id' => 'id']);
+        return $this->hasMany(Image::className(), ['id' => 'image_id'])
+            ->viaTable('products_images', ['product_id' => 'id'])
+            ->with(['products']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProductType()
+    public function getTypes()
     {
-        return $this->hasMany(ProductType::className(), ['product_id' => 'id']);
+        return $this->hasMany(Type::className(), ['id' => 'type_id'])
+            ->viaTable('products_types', ['product_id' => 'id']);
     }
 
     /**
@@ -74,5 +78,10 @@ class Product extends \yii\db\ActiveRecord
     public static function find()
     {
         return new ProductQuery(get_called_class());
+    }
+
+    public function fields()
+    {
+        return ['id', 'title', 'price', 'availability', 'types', 'images'];
     }
 }

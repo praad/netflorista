@@ -7,9 +7,9 @@ use Yii;
 /**
  * This is the model class for table "types".
  *
- * @property int             $id
- * @property string          $title
- * @property ProductsTypes[] $productsTypes
+ * @property int            $id
+ * @property string         $title
+ * @property ProductsType[] $productsType
  */
 class Type extends \yii\db\ActiveRecord
 {
@@ -46,9 +46,10 @@ class Type extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProductType()
+    public function getProducts()
     {
-        return $this->hasMany(ProductType::className(), ['type_id' => 'id']);
+        return $this->hasMany(Product::className(), ['id' => 'product_id'])
+            ->viaTable('products_types', ['id' => 'id']);
     }
 
     /**
