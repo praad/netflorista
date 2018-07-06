@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use Yii;
@@ -8,13 +9,14 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Product;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
 /**
- * Site controller
+ * Site controller.
  */
 class SiteController extends Controller
 {
@@ -191,7 +193,9 @@ class SiteController extends Controller
      * Resets password.
      *
      * @param string $token
+     *
      * @return mixed
+     *
      * @throws BadRequestHttpException
      */
     public function actionResetPassword($token)
@@ -210,6 +214,20 @@ class SiteController extends Controller
 
         return $this->render('resetPassword', [
             'model' => $model,
+        ]);
+    }
+
+    /**
+     * Lists all Product models.
+     *
+     * @return mixed
+     */
+    public function actionProducts()
+    {
+        $product = Product::find()->orderBy(['id' => SORT_DESC])->one();
+
+        return $this->render('products', [
+            'product' => $product,
         ]);
     }
 }
