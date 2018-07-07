@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**
  * This is the model class for table "products".
@@ -16,6 +17,28 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+    use \lhs\Yii2SaveRelationsBehavior\SaveRelationsTrait; // Optional
+
+    public function behaviors()
+    {
+        return [
+            'saveRelations' => [
+                'class' => SaveRelationsBehavior::className(),
+                'relations' => [
+                    'types',
+                    'images',
+                ],
+            ],
+        ];
+    }
+
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -46,7 +69,7 @@ class Product extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'title' => Yii::t('app', 'Title'),
             'price' => Yii::t('app', 'Price'),
-            'types' => Yii::t('app', 'Type'),
+            'types' => Yii::t('app', 'Types'),
             'images' => Yii::t('app', 'Images'),
             'availability' => Yii::t('app', 'Availability'),
         ];

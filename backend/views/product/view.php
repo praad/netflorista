@@ -12,17 +12,17 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title); ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
-        ]) ?>
+        ]); ?>
     </p>
 
     <?= DetailView::widget([
@@ -31,8 +31,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'price',
+
+            [
+                'attribute' => 'types',
+                'value' => function ($product) {
+                    return join(', ', yii\helpers\ArrayHelper::map($product->types, 'id', 'title'));
+                },
+             ],
+             [
+                'attribute' => 'images',
+                'value' => function ($product) {
+                    return join(', ', yii\helpers\ArrayHelper::map($product->images, 'id', 'url'));
+                },
+             ],
+
             'availability',
         ],
-    ]) ?>
+    ]); ?>
 
 </div>

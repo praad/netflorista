@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -12,12 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title); ?></h1>
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success']); ?>
     </p>
 
     <?= GridView::widget([
@@ -29,6 +30,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'price',
+
+            [
+                'attribute' => 'types',
+                'value' => function ($product) {
+                    return join(', ', yii\helpers\ArrayHelper::map($product->types, 'id', 'title'));
+                },
+             ],
+             [
+                'attribute' => 'images',
+                'value' => function ($product) {
+                    return join(', ', yii\helpers\ArrayHelper::map($product->images, 'id', 'url'));
+                },
+             ],
+
             'availability',
 
             ['class' => 'yii\grid\ActionColumn'],

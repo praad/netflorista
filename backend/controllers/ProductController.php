@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Product;
+use common\models\Type;
 use common\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -81,14 +82,21 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
+        $typesAll = Type::find()->all();
         $model = new Product();
+        $types = new Type();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $types->load(Yii::$app->request->post())) {
+            //$model->loadRelations(Yii::$app->request->post());
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
             'model' => $model,
+            'types' => $typesAll,
         ]);
     }
 
