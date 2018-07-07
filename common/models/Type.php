@@ -61,4 +61,17 @@ class Type extends \yii\db\ActiveRecord
     {
         return new TypeQuery(get_called_class());
     }
+
+    /**
+     * Get all the available types(*4).
+     *
+     * @return array available types
+     */
+    public static function getAvailableTypes()
+    {
+        $types = self::find()->order('title')->asArray()->all();
+        $items = ArrayHelper::map($types, 'id', 'title');
+
+        return $items;
+    }
 }
