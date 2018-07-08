@@ -23,6 +23,12 @@ use yii\helpers\Url;
             array('multiple' => true, 'selected' => 'selected'));
     ?>
 
+    <?= $form->field($model, 'images', ['template' => '{label}{input}<a href="'.Url::toRoute('image/create').'">'.yii::t('app', 'Upload new image').'</a>'])->dropDownList(
+            ArrayHelper::map($images, 'id', 'url'),
+            array('multiple' => true, 'selected' => 'selected'));
+    ?>
+
+
     <?= $form->field($model, 'availability')->checkBox(['label' => yii::t('app', 'This product is available'), 'uncheck' => 0, 'checked' => 1]); ?>
 
     <div class="form-group">

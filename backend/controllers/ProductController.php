@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Product;
 use common\models\Type;
+use common\models\Image;
 use common\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -82,20 +83,31 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
-        $typesAll = Type::find()->all();
         $model = new Product();
-        $types = new Product();
+        $typesAll = Type::find()->all();
+        $typesOld = $model->types;
+        $imagesAll = Image::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
             //var_dump($_POST['Product']['types']);
 
             $model->save();
 
-            if (isset($_POST['Product']['types'])) {
+            // Types
+            if (!empty($_POST['Product']['types'])) {
                 $types = $_POST['Product']['types'];
 
                 foreach ($types as $type) {
                     $model->link('types', Type::findOne($type));
+                }
+            }
+
+            // Images
+            if (!empty($_POST['Product']['images'])) {
+                $types = $_POST['Product']['images'];
+
+                foreach ($images as $image) {
+                    $model->link('images', Image::findOne($image));
                 }
             }
 
@@ -107,6 +119,7 @@ class ProductController extends Controller
         return $this->render('create', [
             'model' => $model,
             'types' => $typesAll,
+            'images' => $imagesAll,
         ]);
     }
 
@@ -122,17 +135,19 @@ class ProductController extends Controller
      */
     public function actionUpdate($id)
     {
-        $typesAll = Type::find()->all();
         $model = $this->findModel($id);
-        $types = new Product();
+        $typesAll = Type::find()->all();
         $typesOld = $model->types;
+        $imagesAll = Image::find()->all();
+        $imagesOld = $model->images;
 
         if ($model->load(Yii::$app->request->post())) {
             //var_dump($_POST['Product']['types']);
 
             $model->save();
 
-            if (isset($_POST['Product']['types'])) {
+            // Types
+            if (!empty($_POST['Product']['types'])) {
                 $types = $_POST['Product']['types'];
 
                 // delet all previous types:
@@ -140,9 +155,24 @@ class ProductController extends Controller
                     $model->unlinkAll('types', true);
                 }
 
-                // set up ne types
+                // setup new types
                 foreach ($types as $type) {
                     $model->link('types', Type::findOne($type));
+                }
+            }
+
+            // Image
+            if (!empty($_POST['Product']['images'])) {
+                $images = $_POST['Product']['images'];
+
+                // delet all previous images:
+                foreach ($imagesOld as $image) {
+                    $model->unlinkAll('images', true);
+                }
+
+                // setup ne images
+                foreach ($images as $image) {
+                    $model->link('images', Image::findOne($image));
                 }
             }
 
@@ -154,6 +184,7 @@ class ProductController extends Controller
         return $this->render('create', [
             'model' => $model,
             'types' => $typesAll,
+            'images' => $imagesAll,
         ]);
     }
 
@@ -171,10 +202,16 @@ class ProductController extends Controller
     {
         $model = $this->findModel($id);
         $typesOld = $model->types;
+        $imagesOld = $model->images;
 
         // delet all types relation:
         foreach ($typesOld as $type) {
             $model->unlinkAll('types', true);
+        }
+
+        // delet all images relation:
+        foreach ($imagesOld as $image) {
+            $model->unlinkAll('images', true);
         }
 
         $this->findModel($id)->delete();

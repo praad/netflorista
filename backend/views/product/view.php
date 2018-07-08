@@ -37,6 +37,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return join(', ', yii\helpers\ArrayHelper::map($model->types, 'id', 'title'));
                 },
              ],
+             [
+                'attribute' => 'images',
+                'value' => function ($model) {
+                    return join(', ', yii\helpers\ArrayHelper::map($model->images, 'id', 'url'));
+                },
+             ],
             'availability',
         ],
     ]); ?>

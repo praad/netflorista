@@ -61,4 +61,12 @@ class Image extends \yii\db\ActiveRecord
     {
         return new ImageQuery(get_called_class());
     }
+
+    /**
+     * @return string path to image file
+     */
+    public function getPath()
+    {
+        return Yii::getAlias('@frontend/web/images/'.$this->getHash().'.jpg');
+    }
 }
