@@ -122,14 +122,38 @@ class ProductController extends Controller
      */
     public function actionUpdate($id)
     {
+        $typesAll = Type::find()->all();
         $model = $this->findModel($id);
+        $types = new Product();
+        $typesOld = $model->types;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            //var_dump($_POST['Product']['types']);
+
+            $model->save();
+
+            if (isset($_POST['Product']['types'])) {
+                $types = $_POST['Product']['types'];
+
+                // delet all previous types:
+                foreach ($typesOld as $type) {
+                    $model->unlinkAll('types', true);
+                }
+
+                // set up ne types
+                foreach ($types as $type) {
+                    $model->link('types', Type::findOne($type));
+                }
+            }
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
-        return $this->render('update', [
+        return $this->render('create', [
             'model' => $model,
+            'types' => $typesAll,
         ]);
     }
 
@@ -145,6 +169,14 @@ class ProductController extends Controller
      */
     public function actionDelete($id)
     {
+        $model = $this->findModel($id);
+        $typesOld = $model->types;
+
+        // delet all types relation:
+        foreach ($typesOld as $type) {
+            $model->unlinkAll('types', true);
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
