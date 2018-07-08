@@ -23,8 +23,6 @@ use yii\helpers\Url;
             array('multiple' => true, 'selected' => 'selected'));
     ?>
 
-    <?= $form->field($model, 'images')->dropDownList($model->images); ?>
-
     <?= $form->field($model, 'availability')->checkBox(['label' => yii::t('app', 'This product is available'), 'uncheck' => 0, 'checked' => 1]); ?>
 
     <div class="form-group">

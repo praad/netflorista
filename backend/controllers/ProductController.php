@@ -84,10 +84,20 @@ class ProductController extends Controller
     {
         $typesAll = Type::find()->all();
         $model = new Product();
-        $types = new Type();
+        $types = new Product();
 
-        if ($model->load(Yii::$app->request->post()) && $types->load(Yii::$app->request->post())) {
-            //$model->loadRelations(Yii::$app->request->post());
+        if ($model->load(Yii::$app->request->post())) {
+            //var_dump($_POST['Product']['types']);
+
+            $model->save();
+
+            if (isset($_POST['Product']['types'])) {
+                $types = $_POST['Product']['types'];
+
+                foreach ($types as $type) {
+                    $model->link('types', Type::findOne($type));
+                }
+            }
 
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);

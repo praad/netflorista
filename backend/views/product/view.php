@@ -31,20 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'price',
-
             [
                 'attribute' => 'types',
-                'value' => function ($product) {
-                    return join(', ', yii\helpers\ArrayHelper::map($product->types, 'id', 'title'));
+                'value' => function ($model) {
+                    return join(', ', yii\helpers\ArrayHelper::map($model->types, 'id', 'title'));
                 },
              ],
-             [
-                'attribute' => 'images',
-                'value' => function ($product) {
-                    return join(', ', yii\helpers\ArrayHelper::map($product->images, 'id', 'url'));
-                },
-             ],
-
             'availability',
         ],
     ]); ?>
