@@ -79,7 +79,7 @@ class ImageController extends Controller
 
             if ($model->file && $model->validate()) {
                 $model->file->saveAs(Yii::getAlias('@uploads').'/'.$model->file->baseName.'.'.$model->file->extension);
-                $image->url = Yii::getAlias('@uploads').'/'.$model->file->baseName.'.'.$model->file->extension;
+                $image->url = Yii::getAlias('@webuploads').'/'.$model->file->baseName.'.'.$model->file->extension;
                 $image->save();
             }
 

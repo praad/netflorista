@@ -48,6 +48,12 @@ return [
                 '<action:(.*)>' => 'site/<action>', // remove /site from the url
             ),
         ],
+        'urlManagerFrontEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => 'http://frontend.test', // TODO find a better solution to reach frontend
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
     ],
     'params' => $params,
 ];

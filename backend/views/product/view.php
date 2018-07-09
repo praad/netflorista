@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     $images = yii\helpers\ArrayHelper::map($model->images, 'id', 'url');
     foreach ($images as $image) {
-        echo Html::img(Yii::getAlias('@uploads').'/'.$image, ['width' => '100', 'height' => '100']);
+        echo Html::img(\Yii::$app->urlManagerFrontEnd->baseUrl.$image, ['width' => '100', 'height' => '100']);
     }
     ?>
 

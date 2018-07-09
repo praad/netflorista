@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'url:url',
             [
                 'attribute' => 'image',
-                'value' => $model->url,
+                'value' => \Yii::$app->urlManagerFrontEnd->baseUrl.$model->url,
                 'format' => ['image', ['width' => '100', 'height' => '100']],
              ],
         ],

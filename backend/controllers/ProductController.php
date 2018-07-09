@@ -104,7 +104,7 @@ class ProductController extends Controller
 
             // Images
             if (!empty($_POST['Product']['images'])) {
-                $types = $_POST['Product']['images'];
+                $images = $_POST['Product']['images'];
 
                 foreach ($images as $image) {
                     $model->link('images', Image::findOne($image));
