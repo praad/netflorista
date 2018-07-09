@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5207cf5f5ed686b32c77226cb587ce76",
+    "content-hash": "630d5f1d19e73b0163f900453171fba5",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -168,54 +168,6 @@
             "time": "2017-07-16T21:13:23+00:00"
         },
         {
-            "name": "cornernote/yii2-linkall",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cornernote/yii2-linkall.git",
-                "reference": "19a44c911f9ddc303476964aa442b263056bf8a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cornernote/yii2-linkall/zipball/19a44c911f9ddc303476964aa442b263056bf8a0",
-                "reference": "19a44c911f9ddc303476964aa442b263056bf8a0",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "require-dev": {
-                "phpunit/dbunit": "~1.0",
-                "phpunit/phpunit": "4.*",
-                "scrutinizer/ocular": "~1.1"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "cornernote\\linkall\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Brett O'Donnell",
-                    "email": "cornernote@gmail.com",
-                    "homepage": "http://mrphp.com.au/"
-                }
-            ],
-            "description": "Behavior to handle saving multiple many to many related records in Yii2.",
-            "keywords": [
-                "link",
-                "linkall",
-                "many to many",
-                "yii2"
-            ],
-            "time": "2015-06-20T08:36:12+00:00"
-        },
-        {
             "name": "doctrine/lexer",
             "version": "v1.0.1",
             "source": {
@@ -372,53 +324,6 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
-        },
-        {
-            "name": "la-haute-societe/yii2-save-relations-behavior",
-            "version": "1.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/la-haute-societe/yii2-save-relations-behavior.git",
-                "reference": "264731f1b46a900859ce6e986e81582a39a25401"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/la-haute-societe/yii2-save-relations-behavior/zipball/264731f1b46a900859ce6e986e81582a39a25401",
-                "reference": "264731f1b46a900859ce6e986e81582a39a25401",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": ">=2.0.7"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "lhs\\Yii2SaveRelationsBehavior\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alban Jubert",
-                    "email": "alban@lahautesociete.com"
-                }
-            ],
-            "description": "Validate and save automatically related Active Record models.",
-            "keywords": [
-                "Behavior",
-                "active-query",
-                "active-record",
-                "database",
-                "extension",
-                "has-many",
-                "has-one",
-                "relations",
-                "yii2"
-            ],
-            "time": "2018-03-04T14:55:08+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

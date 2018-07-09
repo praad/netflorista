@@ -18,13 +18,6 @@ class Product extends \yii\db\ActiveRecord
 {
     //public $types;
 
-    public function behaviors()
-    {
-        return [
-            \cornernote\linkall\LinkAllBehavior::className(),
-        ];
-    }
-
     /**
      * {@inheritdoc}
      */

@@ -47,4 +47,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+
+    <h2><?= Yii::t('app', 'Product images'); ?></h2>
+
+    <?php
+    $images = yii\helpers\ArrayHelper::map($model->images, 'id', 'url');
+    foreach ($images as $image) {
+        echo Html::img(Yii::getAlias('@uploads').'/'.$image, ['width' => '100', 'height' => '100']);
+    }
+    ?>
+
 </div>

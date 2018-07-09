@@ -5,9 +5,11 @@ namespace backend\controllers;
 use Yii;
 use common\models\Image;
 use common\models\ImageSearch;
+use backend\models\UploadForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ImagesController implements the CRUD actions for Image model.
@@ -69,10 +71,21 @@ class ImageController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Image();
+        $model = new UploadForm();
+        $image = new Image();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->file && $model->validate()) {
+                $model->file->saveAs(Yii::getAlias('@uploads').'/'.$model->file->baseName.'.'.$model->file->extension);
+                $image->url = Yii::getAlias('@uploads').'/'.$model->file->baseName.'.'.$model->file->extension;
+                $image->save();
+            }
+
+            if ($image->save()) {
+                return $this->redirect(['view', 'id' => $image->id]);
+            }
         }
 
         return $this->render('create', [
